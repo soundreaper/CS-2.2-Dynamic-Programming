@@ -76,7 +76,19 @@ def knapsack_dp(items, capacity):
     
 def edit_distance(str1, str2):
     """Compute the Edit Distance between 2 strings."""
-    pass
+    if len(str1) == 0:
+        return len(str2)
+    if len(str2) == 0:
+        return len(str1)
+    
+    if str1[-1] == str2[-1]:
+        return edit_distance(str1[:-1], str2[:-1])
+
+    insert = edit_distance(str1, str2[:-1])
+    delete = edit_distance(str1[:-1], str2)
+    replace = edit_distance(str1[:-1], str2[:-1])
+
+    return 1 + min(insert, delete, replace)
 
 def edit_distance_dp(str1, str2):
     """Compute the Edit Distance between 2 strings."""
