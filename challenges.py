@@ -19,7 +19,7 @@ def lcs(strA, strB):
         return max(lcs(strA[:-1], strB), lcs(strA, strB[:-1]))
 
 
-def lcs_dp(strA, strB):
+    def lcs_dp(strA, strB):
     """Determine the length of the Longest Common Subsequence of 2 strings."""
     rows = len(strA) + 1
     cols = len(strB) + 1
@@ -27,8 +27,16 @@ def lcs_dp(strA, strB):
     dp_table = [[0 for j in range(cols)] for i in range(rows)]
 
     # TODO: Fill in the table using a nested for loop.
+    for i in range(rows):
+        for j in range(cols):
+            if i == 0 or j == 0:
+                dp_table[i][j] = 0
+            elif strA[i - 1] == strB[j - 1]:
+                dp_table[i][j] = dp_table[i-1][j-1] + 1
+            else:
+                dp_table[i][j] = max(dp_table[i-1][j], dp_table[i][j-1])
 
-    return dp_table[rows-1][cols-1]
+    return dp_table[rows - 1][cols - 1]
 
 def knapsack(items, capacity):
     """Return the maximum value that can be stored in the knapsack using the
